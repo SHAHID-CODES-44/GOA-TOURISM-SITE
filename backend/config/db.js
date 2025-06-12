@@ -2,18 +2,24 @@ import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const databaseUrl = process.env.DATABASE_URL;
+const {
+  DB_USER,
+  DB_PASSWORD,
+  DB_HOST,
+  DB_PORT,
+  DB_NAME
+} = process.env;
 
-// 👉 Add this line
-console.log("🔍 DATABASE_URL used:", databaseUrl);
-
-if (!databaseUrl) {
-  throw new Error('❌ DATABASE_URL is not defined!');
+if (!DB_USER || !DB_PASSWORD || !DB_HOST || !DB_PORT || !DB_NAME) {
+  throw new Error('❌ One or more database environment variables are not defined!');
 }
 
-const sequelize = new Sequelize(databaseUrl, {
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+  host: DB_HOST,
   dialect: 'mysql',
-  logging: false,
+  logging: console.log,  // or false to disable query logs
 });
+
+console.log(`🔍 Connected to MySQL at ${DB_HOST}:${DB_PORT}, database: ${DB_NAME}`);
 
 export default sequelize;
