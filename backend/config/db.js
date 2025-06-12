@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// Extract environment variables
+// Extract env variables
 const {
   DB_USER,
   DB_PASSWORD,
@@ -11,10 +11,10 @@ const {
   DB_NAME
 } = process.env;
 
-// Optional: Debug logs to see if values are coming through
+// Debug log (hide password)
 console.log("🧪 ENV CHECK:", {
   DB_USER,
-  DB_PASSWORD: DB_PASSWORD ? '****' : undefined, // Hide password
+  DB_PASSWORD: DB_PASSWORD ? '****' : undefined,
   DB_HOST,
   DB_PORT,
   DB_NAME
@@ -25,10 +25,10 @@ if (!DB_USER || !DB_PASSWORD || !DB_HOST || !DB_NAME || !DB_PORT) {
   throw new Error('❌ One or more database environment variables are not defined!');
 }
 
-// Create Sequelize instance
+// Initialize Sequelize
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   host: DB_HOST,
-  port: Number(DB_PORT), // Ensure port is a number
+  port: Number(DB_PORT),
   dialect: 'mysql',
   logging: false,
   dialectOptions: {
@@ -36,7 +36,7 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   },
 });
 
-// Optional: Test DB connection
+// Optional: Test connection
 sequelize.authenticate()
   .then(() => {
     console.log(`✅ Connected to MySQL at ${DB_HOST}:${DB_PORT} | DB: ${DB_NAME}`);
