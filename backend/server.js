@@ -27,6 +27,9 @@ const app = express();
 // ES module __dirname fix
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+app.get('/', (req, res) => {
+  res.send('Server is up and running!');
+});
 
 // Middleware
 app.use(cors());
