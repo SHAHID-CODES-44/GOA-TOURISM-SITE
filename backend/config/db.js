@@ -1,11 +1,15 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
+dotenv.config(); // Load env variables
 
-dotenv.config();
+const dbUrl = process.env.DATABASE_URL;
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
+if (!dbUrl) {
+  throw new Error('❌ DATABASE_URL is not defined!');
+}
+
+const sequelize = new Sequelize(dbUrl, {
   dialect: 'mysql',
-  logging: false, // Disable logging if needed
 });
 
 export default sequelize;
