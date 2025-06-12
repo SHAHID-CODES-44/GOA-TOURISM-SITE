@@ -6,11 +6,10 @@ const {
   DB_USER,
   DB_PASSWORD,
   DB_HOST,
-  DB_PORT,
   DB_NAME
 } = process.env;
 
-if (!DB_USER || !DB_PASSWORD || !DB_HOST || !DB_PORT || !DB_NAME) {
+if (!DB_USER || !DB_PASSWORD || !DB_HOST || !DB_NAME) {
   throw new Error('❌ One or more database environment variables are not defined!');
 }
 
