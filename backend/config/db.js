@@ -10,17 +10,20 @@ const {
   DB_NAME
 } = process.env;
 
-if (!DB_USER || !DB_PASSWORD || !DB_HOST || !DB_NAME || !DB_PORT) {
+if (!DB_USER || !DB_PASSWORD || !DB_HOST || !DB_PORT || !DB_NAME) {
   throw new Error('❌ One or more database environment variables are not defined!');
 }
 
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   host: DB_HOST,
-  port: DB_PORT, // ✅ Important for Railway
+  port: DB_PORT,
   dialect: 'mysql',
-  logging: false, // Set to false to keep console clean
+  logging: false,
+  dialectOptions: {
+    connectTimeout: 10000, // optional: helps prevent ETIMEDOUT
+  },
 });
 
-console.log(`🔍 Connecting to MySQL at ${DB_HOST}:${DB_PORT}, database: ${DB_NAME}`);
+console.log(`🔍 Connected to MySQL at ${DB_HOST}:${DB_PORT}, database: ${DB_NAME}`);
 
 export default sequelize;
