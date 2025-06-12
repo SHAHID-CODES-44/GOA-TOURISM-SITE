@@ -19,6 +19,6 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   logging: console.log,  // or false to disable query logs
 });
 
-console.log(`🔍 Connected to MySQL at ${DB_HOST}:${DB_PORT}, database: ${DB_NAME}`);
+console.log(`🔍 Connected to MySQL at ${DB_HOST}, database: ${DB_NAME}`);
 
 export default sequelize;
