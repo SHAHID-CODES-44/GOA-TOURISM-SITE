@@ -5,7 +5,7 @@ dotenv.config();
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'mysql',
-  logging: false,
+  logging: false, // Disable logging if needed
 });
 
 export default sequelize;
