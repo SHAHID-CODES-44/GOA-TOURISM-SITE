@@ -1,5 +1,5 @@
 import { Op } from 'sequelize';
-import Restaurant from './RestaurantModel.js';
+import Restaurant from './restaurantModel.js';
 
 export const getAllRestaurants = async (filters) => {
   try {
