@@ -23,7 +23,7 @@ const TasteandRestPage = () => {
     if (filters.minRating) query.append('minRating', filters.minRating);
 
     try {
-      const res = await fetch(`https://goa-tourism-backend-production.up.railway.app/food/restaurants?${query.toString()}`);
+      const res = await fetch(`https://goa-tourism-backend-production.up.railway.app/api/food/restaurants?${query.toString()}`);
       const data = await res.json();
       setRestaurants(Array.isArray(data) ? data : [data]);
     } catch (error) {
