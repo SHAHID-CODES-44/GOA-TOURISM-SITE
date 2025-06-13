@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./TasteandRestPage.css";
 import { Helmet } from 'react-helmet';
+import { fetchRestaurants } from '../services/restaurantService';
 
 const TasteandRestPage = () => {
   const [filters, setFilters] = useState({
@@ -14,17 +15,10 @@ const TasteandRestPage = () => {
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const fetchRestaurants = async () => {
+  const loadRestaurants = async () => {
     setLoading(true);
-
-    const query = new URLSearchParams();
-    if (filters.location) query.append('location', filters.location);
-    if (filters.cuisine) query.append('cuisine', filters.cuisine);
-    if (filters.minRating) query.append('minRating', filters.minRating);
-
     try {
-      const res = await fetch(`https://goa-tourism-backend-production.up.railway.app/api/food/restaurants?${query.toString()}`);
-      const data = await res.json();
+      const data = await fetchRestaurants(filters);
       setRestaurants(Array.isArray(data) ? data : [data]);
     } catch (error) {
       console.error('Error fetching restaurants:', error);
@@ -35,7 +29,7 @@ const TasteandRestPage = () => {
   };
 
   useEffect(() => {
-    fetchRestaurants();
+    loadRestaurants();
   }, [filters]);
 
   const handleFilterChange = (e) => {
@@ -60,9 +54,7 @@ const TasteandRestPage = () => {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isModalOpen) {
-        closeModal();
-      }
+      if (e.key === 'Escape' && isModalOpen) closeModal();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
@@ -73,9 +65,6 @@ const TasteandRestPage = () => {
       <Helmet>
         <title>Best Restaurants & Eats in Goa | Top Goan Cuisine & Dining 2025</title>
         <meta name="description" content="Explore the finest restaurants and eateries in Goa offering authentic Goan cuisine, seafood, luxury dining, and budget-friendly options." />
-        <meta name="keywords" content="Goa restaurants, Goan cuisine, seafood restaurants Goa, luxury dining Goa, budget restaurants Goa" />
-        <meta name="author" content="YourSiteName" />
-        <meta name="robots" content="index, follow" />
       </Helmet>
 
       <div className="navbar-food">
@@ -151,12 +140,12 @@ const TasteandRestPage = () => {
           ) : (
             restaurants.map((restaurant) => (
               <div
-                key={restaurant._id || restaurant.id}
+                key={restaurant.id}
                 className="restaurant-card"
                 onClick={() => openModal(restaurant)}
               >
                 <img
-                  src={`https://goa-tourism-backend-production.up.railway.app/uploads/foodImages/${restaurant.image}`}
+                  src={`/uploads/foodImages/${restaurant.image}`}
                   alt={restaurant.name}
                   onError={(e) => {
                     e.target.onerror = null;
@@ -182,10 +171,9 @@ const TasteandRestPage = () => {
             <div className="modal-overlay" onClick={closeModal}>
               <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <button className="modal-close-btn" onClick={closeModal} aria-label="Close modal">&times;</button>
-
                 <div className="modal-image-container">
                   <img
-                    src={`https://goa-tourism-backend-production.up.railway.app/uploads/foodImages/${selectedRestaurant.image}`}
+                    src={`/uploads/foodImages/${selectedRestaurant.image}`}
                     alt={selectedRestaurant.name}
                     className="modal-image"
                     onError={(e) => {
@@ -194,37 +182,11 @@ const TasteandRestPage = () => {
                     }}
                   />
                 </div>
-
                 <div className="modal-details">
                   <h2>{selectedRestaurant.name}</h2>
-                  <div className="detail-row"><span className="detail-label">Location:</span> {selectedRestaurant.location}</div>
-                  <div className="detail-row"><span className="detail-label">Cuisine:</span> {selectedRestaurant.cuisine}</div>
-                  <div className="detail-row rating-stars">
-                    <span className="detail-label">Rating:</span>
-                    {Array.from({ length: Math.floor(selectedRestaurant.rating) }).map((_, i) => <span key={i}>⭐</span>)}
-                    {selectedRestaurant.rating % 1 >= 0.5 && <span>½</span>}
-                    <span className="rating-value">({selectedRestaurant.rating})</span>
-                  </div>
-
-                  {selectedRestaurant.description && (
-                    <div className="detail-row full-width">
-                      <span className="detail-label">Description:</span>
-                      <p>{selectedRestaurant.description}</p>
-                    </div>
-                  )}
-
-                  {selectedRestaurant.hours && (
-                    <div className="detail-row"><span className="detail-label">Opening Hours:</span> {selectedRestaurant.hours}</div>
-                  )}
-
-                  {selectedRestaurant.priceRange && (
-                    <div className="detail-row"><span className="detail-label">Price Range:</span> {selectedRestaurant.priceRange}</div>
-                  )}
-
-                  {selectedRestaurant.contact && (
-                    <div className="detail-row"><span className="detail-label">Contact:</span> {selectedRestaurant.contact}</div>
-                  )}
-
+                  <p><b>Location:</b> {selectedRestaurant.location}</p>
+                  <p><b>Cuisine:</b> {selectedRestaurant.cuisine}</p>
+                  <p><b>Rating:</b> {selectedRestaurant.rating}</p>
                   <div className="modal-actions">
                     <a href="/Map" className="modal-direction-btn" onClick={(e) => e.stopPropagation()}>
                       See Directions
