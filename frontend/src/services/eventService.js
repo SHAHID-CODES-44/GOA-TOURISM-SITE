@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:5000/api/events'; // Adjust if your backend base URL differs
+const API_BASE = 'https://goa-tourism-backend-production.up.railway.app/api/events'; // Adjust if your backend base URL differs
 
 export const fetchEvents = async () => {
   const response = await fetch(API_BASE);

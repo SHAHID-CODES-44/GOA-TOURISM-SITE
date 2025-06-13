@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api/food/restaurants';
+const API_URL = 'https://goa-tourism-backend-production.up.railway.app/api/food/restaurants';
 
 export const fetchRestaurants = async (filters = {}) => {
   try {

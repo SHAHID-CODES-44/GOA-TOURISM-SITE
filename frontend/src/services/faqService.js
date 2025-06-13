@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = 'http://localhost:5000/api/faqs'; // adjust if your backend is hosted elsewhere
+const API_BASE = 'https://goa-tourism-backend-production.up.railway.app/api/faqs'; // adjust if your backend is hosted elsewhere
 
 // Get all FAQs
 export const getFAQs = async () => {

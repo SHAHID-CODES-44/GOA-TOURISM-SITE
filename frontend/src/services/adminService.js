@@ -1,6 +1,6 @@
-const ADVENTURE_BASE_URL = 'http://localhost:5000/api/admin/adventures';
-const BEACH_BASE_URL = 'http://localhost:5000/api/admin/beaches';
-const RESTAURANT_BASE_URL = 'http://localhost:5000/api/admin/restaurants';
+const ADVENTURE_BASE_URL = 'https://goa-tourism-backend-production.up.railway.app/api/admin/adventures';
+const BEACH_BASE_URL = 'https://goa-tourism-backend-production.up.railway.app/api/admin/beaches';
+const RESTAURANT_BASE_URL = 'https://goa-tourism-backend-production.up.railway.app/api/admin/restaurants';
 
 // Adventure APIs
 export const getAdventures = async () => {

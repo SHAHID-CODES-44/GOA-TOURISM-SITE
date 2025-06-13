@@ -1,6 +1,6 @@
 // frontend/src/services/wildlifeService.js
 
-const API_URL = "http://localhost:5000/api/wildlife";
+const API_URL = "https://goa-tourism-backend-production.up.railway.app/api/wildlife";
 
 export const fetchWildlifeList = async () => {
   try {

@@ -1,6 +1,6 @@
 // frontend/src/services/postService.js
 
-const API_BASE = 'http://localhost:5000/api/posts';
+const API_BASE = 'https://goa-tourism-backend-production.up.railway.app/api/posts';
 
 export async function fetchPosts() {
   const res = await fetch(API_BASE);

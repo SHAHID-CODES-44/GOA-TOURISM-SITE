@@ -4,7 +4,7 @@ export const fetchBeaches = async (filters) => {
   if (filters.location) query.append('location', filters.location);
   if (filters.search) query.append('search', filters.search);
 
-  const res = await fetch(`http://localhost:5000/api/beaches?${query.toString()}`);
+  const res = await fetch(`https://goa-tourism-backend-production.up.railway.app/api/beaches?${query.toString()}`);
   if (!res.ok) throw new Error('Failed to fetch beaches');
   const data = await res.json();
   return data;

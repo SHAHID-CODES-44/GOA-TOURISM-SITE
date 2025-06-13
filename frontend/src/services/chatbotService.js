@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:5000/api/chatbot';
+const API_BASE = 'https://goa-tourism-backend-production.up.railway.app/api/chatbot';
 
 export const getMajorOptions = async () => {
   const res = await fetch(`${API_BASE}/major-options`);

@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/feedback';
+const API_URL = 'https://goa-tourism-backend-production.up.railway.app/api/feedback';
 
 // Submit feedback
 export const submitFeedback = async (feedbackData) => {
