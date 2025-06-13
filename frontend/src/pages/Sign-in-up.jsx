@@ -21,8 +21,8 @@ const SignupIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const url = isSignup
-      ? "http://localhost:5000/api/auth/register"
-      : "http://localhost:5000/api/auth/login";
+      ? "https://goa-tourism-backend-production.up.railway.app/api/auth/register"
+      : "https://goa-tourism-backend-production.up.railway.app/api/auth/login";
 
     try {
       const response = await axios.post(url, formData);
