@@ -20,6 +20,7 @@ import adventureRoutes from './routes/adventureRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import admloginRoutes from './routes/admloginRoutes.js';
 import adminProtectedRoutes from './routes/adminProtectedRoutes.js';
+import restaurantRoutes from './routes/restaurantRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -47,6 +48,7 @@ app.use('/api/beaches', beachRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/adventure', adventureRoutes);
 app.use('/api/chatbot', chatbotRoutes);
+app.use('/api/food', restaurantRoutes); // Already used probably, confirm path
 
 // ✅ Login route (no auth required)
 app.use('/api/admin', admloginRoutes);
