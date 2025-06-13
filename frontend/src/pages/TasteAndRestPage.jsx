@@ -156,7 +156,7 @@ const TasteandRestPage = () => {
                 onClick={() => openModal(restaurant)}
               >
                 <img
-                  src={`/uploads/foodImages/${restaurant.image}`}
+                  src={`https://goa-tourism-backend-production.up.railway.app/uploads/foodImages/${restaurant.image}`}
                   alt={restaurant.name}
                   onError={(e) => {
                     e.target.onerror = null;
@@ -185,7 +185,7 @@ const TasteandRestPage = () => {
 
                 <div className="modal-image-container">
                   <img
-                    src={`/uploads/foodImages/${selectedRestaurant.image}`}
+                    src={`https://goa-tourism-backend-production.up.railway.app/uploads/foodImages/${selectedRestaurant.image}`}
                     alt={selectedRestaurant.name}
                     className="modal-image"
                     onError={(e) => {
