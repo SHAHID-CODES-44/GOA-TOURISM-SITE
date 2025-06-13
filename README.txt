@@ -97,4 +97,6 @@ Emergency contact list and transport guide
 Real-time data handling through feedback and admin inputs
 
 Deployment
-Deployment setup was not possible due to sudden crash in server.
+
+Final Hosted Link........
+https://goa-tourism-site.vercel.app/
